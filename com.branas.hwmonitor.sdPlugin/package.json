@@ -4,6 +4,7 @@
   "description": "Hardware monitor for your Stream Deck",
   "main": "bin/plugin.js",
   "dependencies": {
+    "canvas": "^3.2.0",
     "ws": "^8.14.2"
   }
 }
