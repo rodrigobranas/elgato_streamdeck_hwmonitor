@@ -1,0 +1,9 @@
+{
+  "name": "com.branas.hwmonitor",
+  "version": "1.0.0",
+  "description": "Hardware monitor for your Stream Deck",
+  "main": "bin/plugin.js",
+  "dependencies": {
+    "ws": "^8.14.2"
+  }
+}

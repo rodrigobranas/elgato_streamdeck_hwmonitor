@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "UUID": "com.branas.hwmonitor",
+  "Name": "HW Monitor",
+  "Version": "1.0.0.0",
+  "Author": "Rodrigo Branas",
+  "Description": "Hardware monitor for your Stream Deck",
+  "Category": "Hardware Monitor",
+  "Icon": "images/plugin",
+  "CategoryIcon": "images/category",
+  "CodePath": "bin/plugin.js",
+  "Actions": [
+    {
+      "UUID": "com.branas.hwmonitor.disk",
+      "Name": "Disk Monitor",
+      "Icon": "images/action",
+      "Tooltip": "Shows available disk space",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "images/action",
+          "TitleAlignment": "middle",
+          "FontSize": 16,
+          "ShowTitle": true
+        }
+      ]
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.4"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.15"
+    }
+  ],
+  "Nodejs": {
+    "Version": "20"
+  }
+}
