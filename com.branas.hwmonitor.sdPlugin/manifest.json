@@ -6,19 +6,64 @@
   "Author": "Rodrigo Branas",
   "Description": "Hardware monitor for your Stream Deck",
   "Category": "Hardware Monitor",
-  "Icon": "images/plugin",
-  "CategoryIcon": "images/category",
+  "Icon": "images/hw",
+  "CategoryIcon": "images/hw",
   "CodePath": "bin/plugin.js",
   "Actions": [
     {
       "UUID": "com.branas.hwmonitor.disk",
       "Name": "Disk Monitor",
-      "Icon": "images/action",
+      "Icon": "images/disk",
       "Tooltip": "Shows available disk space",
       "Controllers": ["Keypad"],
       "States": [
         {
-          "Image": "images/action",
+          "Image": "images/disk",
+          "TitleAlignment": "middle",
+          "FontSize": 16,
+          "ShowTitle": true
+        }
+      ]
+    },
+    {
+      "UUID": "com.branas.hwmonitor.cpu",
+      "Name": "CPU Monitor",
+      "Icon": "images/cpu",
+      "Tooltip": "Shows CPU usage",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "images/cpu",
+          "TitleAlignment": "middle",
+          "FontSize": 16,
+          "ShowTitle": true
+        }
+      ]
+    },
+    {
+      "UUID": "com.branas.hwmonitor.memory",
+      "Name": "Memory Monitor",
+      "Icon": "images/mem",
+      "Tooltip": "Shows memory usage",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "images/mem",
+          "TitleAlignment": "middle",
+          "FontSize": 16,
+          "ShowTitle": true
+        }
+      ]
+    },
+    {
+      "UUID": "com.branas.hwmonitor.network",
+      "Name": "Network Monitor",
+      "Icon": "images/net",
+      "Tooltip": "Shows network latency",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "images/net",
           "TitleAlignment": "middle",
           "FontSize": 16,
           "ShowTitle": true

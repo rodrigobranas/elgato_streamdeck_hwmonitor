@@ -1,7 +1,0 @@
-<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" fill="#1a1a1a"/>
-  <circle cx="256" cy="256" r="180" fill="none" stroke="#4a90e2" stroke-width="12"/>
-  <path d="M 256 76 A 180 180 0 1 1 255.9 76" fill="none" stroke="#6bb6ff" stroke-width="24" stroke-linecap="round" 
-        stroke-dasharray="565" stroke-dashoffset="282"/>
-  <text x="256" y="270" font-family="Arial, sans-serif" font-size="72" fill="white" text-anchor="middle">HW</text>
-</svg>
