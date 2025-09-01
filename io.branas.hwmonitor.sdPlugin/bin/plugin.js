@@ -34,7 +34,7 @@ ws.on('message', (data) => {
     const { event, context, action } = msg;
     
     if (event === 'willAppear') {
-        if (action === 'com.branas.hwmonitor.disk') {
+        if (action === 'io.branas.hwmonitor.disk') {
             // Clear any existing title first
             ws.send(JSON.stringify({
                 event: 'setTitle',
@@ -49,7 +49,7 @@ ws.on('message', (data) => {
             updateDiskSpace(context);
             const interval = setInterval(() => updateDiskSpace(context), 10000);
             contexts.set(context, interval);
-        } else if (action === 'com.branas.hwmonitor.cpu') {
+        } else if (action === 'io.branas.hwmonitor.cpu') {
             // Clear any existing title first
             ws.send(JSON.stringify({
                 event: 'setTitle',
@@ -64,7 +64,7 @@ ws.on('message', (data) => {
             updateCPUUsage(context);
             const interval = setInterval(() => updateCPUUsage(context), 5000);
             contexts.set(context, interval);
-        } else if (action === 'com.branas.hwmonitor.memory') {
+        } else if (action === 'io.branas.hwmonitor.memory') {
             // Clear any existing title first
             ws.send(JSON.stringify({
                 event: 'setTitle',
@@ -79,7 +79,7 @@ ws.on('message', (data) => {
             updateMemoryUsage(context);
             const interval = setInterval(() => updateMemoryUsage(context), 3000);
             contexts.set(context, interval);
-        } else if (action === 'com.branas.hwmonitor.network') {
+        } else if (action === 'io.branas.hwmonitor.network') {
             // Clear any existing title first
             ws.send(JSON.stringify({
                 event: 'setTitle',
@@ -107,13 +107,13 @@ ws.on('message', (data) => {
     }
     
     if (event === 'keyDown') {
-        if (action === 'com.branas.hwmonitor.disk') {
+        if (action === 'io.branas.hwmonitor.disk') {
             updateDiskSpace(context);
-        } else if (action === 'com.branas.hwmonitor.cpu') {
+        } else if (action === 'io.branas.hwmonitor.cpu') {
             updateCPUUsage(context);
-        } else if (action === 'com.branas.hwmonitor.memory') {
+        } else if (action === 'io.branas.hwmonitor.memory') {
             updateMemoryUsage(context);
-        } else if (action === 'com.branas.hwmonitor.network') {
+        } else if (action === 'io.branas.hwmonitor.network') {
             updateNetworkLatency(context);
         }
     }

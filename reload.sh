@@ -7,7 +7,7 @@ echo ""
 
 # Kill any existing plugin processes
 echo "Stopping existing plugin processes..."
-pkill -f "com.branas.hwmonitor" 2>/dev/null
+pkill -f "io.branas.hwmonitor" 2>/dev/null
 echo "✓ Plugin processes stopped"
 
 echo ""

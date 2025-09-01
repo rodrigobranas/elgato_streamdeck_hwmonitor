@@ -1,0 +1,95 @@
+{
+	"$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+	"UUID": "io.branas.hwmonitor",
+	"Name": "HW Monitor",
+	"Version": "1.0.0.0",
+	"Author": "Rodrigo Branas",
+	"Description": "Hardware monitor for your Stream Deck",
+	"Category": "HW Monitor",
+	"Icon": "images/hw",
+	"CategoryIcon": "images/hw",
+	"CodePath": "bin/plugin.js",
+	"Actions": [
+		{
+			"UUID": "io.branas.hwmonitor.disk",
+			"Name": "Disk Monitor",
+			"Icon": "images/disk",
+			"Tooltip": "Shows available disk space",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "images/disk",
+					"TitleAlignment": "middle",
+					"FontSize": 16,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "io.branas.hwmonitor.cpu",
+			"Name": "CPU Monitor",
+			"Icon": "images/cpu",
+			"Tooltip": "Shows CPU usage",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "images/cpu",
+					"TitleAlignment": "middle",
+					"FontSize": 16,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "io.branas.hwmonitor.memory",
+			"Name": "Memory Monitor",
+			"Icon": "images/mem",
+			"Tooltip": "Shows memory usage",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "images/mem",
+					"TitleAlignment": "middle",
+					"FontSize": 16,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "io.branas.hwmonitor.network",
+			"Name": "Network Monitor",
+			"Icon": "images/net",
+			"Tooltip": "Shows network latency",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "images/net",
+					"TitleAlignment": "middle",
+					"FontSize": 16,
+					"ShowTitle": true
+				}
+			]
+		}
+	],
+	"SDKVersion": 2,
+	"Software": {
+		"MinimumVersion": "6.4"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "10.15"
+		}
+	],
+	"Nodejs": {
+		"Version": "20"
+	}
+}
