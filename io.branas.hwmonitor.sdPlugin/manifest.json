@@ -77,6 +77,40 @@
 					"ShowTitle": true
 				}
 			]
+		},
+		{
+			"UUID": "io.branas.hwmonitor.cputemp",
+			"Name": "CPU Temp Monitor",
+			"Icon": "images/cputemp",
+			"Tooltip": "Shows CPU temperature",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "images/cputemp",
+					"TitleAlignment": "middle",
+					"FontSize": 16,
+					"ShowTitle": true
+				}
+			]
+		},
+		{
+			"UUID": "io.branas.hwmonitor.gputemp",
+			"Name": "GPU Temp Monitor",
+			"Icon": "images/gputemp",
+			"Tooltip": "Shows GPU temperature",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "images/gputemp",
+					"TitleAlignment": "middle",
+					"FontSize": 16,
+					"ShowTitle": true
+				}
+			]
 		}
 	],
 	"SDKVersion": 2,

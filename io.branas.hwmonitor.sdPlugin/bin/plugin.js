@@ -89,10 +89,28 @@ ws.on('message', (data) => {
                     target: 0
                 }
             }));
-            
+
             // Start Network monitoring
             updateNetworkLatency(context);
             const interval = setInterval(() => updateNetworkLatency(context), 5000);
+            contexts.set(context, interval);
+        } else if (action === 'io.branas.hwmonitor.cputemp') {
+            ws.send(JSON.stringify({
+                event: 'setTitle',
+                context: context,
+                payload: { title: '', target: 0 }
+            }));
+            updateCPUTemp(context);
+            const interval = setInterval(() => updateCPUTemp(context), 10000);
+            contexts.set(context, interval);
+        } else if (action === 'io.branas.hwmonitor.gputemp') {
+            ws.send(JSON.stringify({
+                event: 'setTitle',
+                context: context,
+                payload: { title: '', target: 0 }
+            }));
+            updateGPUTemp(context);
+            const interval = setInterval(() => updateGPUTemp(context), 10000);
             contexts.set(context, interval);
         }
     }
@@ -115,6 +133,10 @@ ws.on('message', (data) => {
             updateMemoryUsage(context);
         } else if (action === 'io.branas.hwmonitor.network') {
             updateNetworkLatency(context);
+        } else if (action === 'io.branas.hwmonitor.cputemp') {
+            updateCPUTemp(context);
+        } else if (action === 'io.branas.hwmonitor.gputemp') {
+            updateGPUTemp(context);
         }
     }
 });
@@ -338,6 +360,74 @@ function updateNetworkLatency(context) {
                 title: title,
                 target: 0
             }
+        }));
+    });
+}
+
+function updateCPUTemp(context) {
+    exec("/opt/homebrew/bin/smctemp -c", (err, stdout) => {
+        if (err) {
+            ws.send(JSON.stringify({
+                event: 'setTitle',
+                context: context,
+                payload: { title: 'Error', target: 0 }
+            }));
+            return;
+        }
+
+        const temp = parseFloat(stdout.trim()) || 0;
+        // Map 30°C=0%, 100°C=100%
+        const percent = Math.max(0, Math.min(100, ((temp - 30) / 70) * 100));
+
+        const imageBase64 = createGridImage(100 - percent);
+        ws.send(JSON.stringify({
+            event: 'setImage',
+            context: context,
+            payload: {
+                image: `data:image/png;base64,${imageBase64}`,
+                target: 0
+            }
+        }));
+
+        const title = `CPU T\n${temp.toFixed(1)}°C`;
+        ws.send(JSON.stringify({
+            event: 'setTitle',
+            context: context,
+            payload: { title: title, target: 0 }
+        }));
+    });
+}
+
+function updateGPUTemp(context) {
+    exec("/opt/homebrew/bin/smctemp -g", (err, stdout) => {
+        if (err) {
+            ws.send(JSON.stringify({
+                event: 'setTitle',
+                context: context,
+                payload: { title: 'Error', target: 0 }
+            }));
+            return;
+        }
+
+        const temp = parseFloat(stdout.trim()) || 0;
+        // Map 30°C=0%, 100°C=100%
+        const percent = Math.max(0, Math.min(100, ((temp - 30) / 70) * 100));
+
+        const imageBase64 = createGridImage(100 - percent);
+        ws.send(JSON.stringify({
+            event: 'setImage',
+            context: context,
+            payload: {
+                image: `data:image/png;base64,${imageBase64}`,
+                target: 0
+            }
+        }));
+
+        const title = `GPU T\n${temp.toFixed(1)}°C`;
+        ws.send(JSON.stringify({
+            event: 'setTitle',
+            context: context,
+            payload: { title: title, target: 0 }
         }));
     });
 }
