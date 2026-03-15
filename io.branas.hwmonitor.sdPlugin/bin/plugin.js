@@ -47,7 +47,7 @@ ws.on('message', (data) => {
             
             // Start monitoring
             updateDiskSpace(context);
-            const interval = setInterval(() => updateDiskSpace(context), 10000);
+            const interval = setInterval(() => updateDiskSpace(context), 30000);
             contexts.set(context, interval);
         } else if (action === 'io.branas.hwmonitor.cpu') {
             // Clear any existing title first
@@ -174,8 +174,8 @@ function createGridImage(usagePercent) {
 }
 
 function updateDiskSpace(context) {
-    // Get both available space and usage percentage
-    exec("df -h / | awk 'NR==2 {print $4, $5}'", (err, stdout) => {
+    // Get APFS container usage percentage
+    exec("diskutil apfs list | grep 'Capacity In Use By Volumes' | head -1 | grep -o '([0-9.]*% used)' | grep -o '[0-9.]*'", (err, stdout) => {
         if (err) {
             ws.send(JSON.stringify({
                 event: 'setTitle',
@@ -187,13 +187,12 @@ function updateDiskSpace(context) {
             }));
             return;
         }
-        
-        const [availableSpace, usagePercentStr] = stdout.trim().split(' ');
-        const usagePercent = parseInt(usagePercentStr.replace('%', '')) || 0;
+
+        const usagePercent = parseFloat(stdout.trim()) || 0;
         const availablePercent = 100 - usagePercent;
-        
+
         // Set the progress bar image - show available space (89% free = 89% green)
-        const imageBase64 = createGridImage(usagePercent);
+        const imageBase64 = createGridImage(availablePercent);
         ws.send(JSON.stringify({
             event: 'setImage',
             context: context,
@@ -202,9 +201,9 @@ function updateDiskSpace(context) {
                 target: 0
             }
         }));
-        
+
         // Set the title with DISK label and available percentage
-        const title = `DISK\n${availablePercent}%`;
+        const title = `DISK\n${usagePercent.toFixed(1)}%`;
         ws.send(JSON.stringify({
             event: 'setTitle',
             context: context,
